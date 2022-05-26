@@ -3,6 +3,10 @@ using namespace std;
 
 //Function declarations
 void Introduction();
+void UserDecision(int);
+void OpenAccount();
+void BWD();
+void CloseAccount();
 //End of function declarations
 
 void Introduction(){
@@ -12,4 +16,19 @@ void Introduction(){
   cout << "2. Check balance / withdraw / deposit" << endl;
   cout << "3. Close an account" << endl;
   cout << "4. Exit" << endl;
+}
+
+void UserDecision(int UserInput){
+  switch(UserInput){
+    case 1:
+      OpenAccount();
+    case 2:
+      BWD();
+    case 3:
+      CloseAccount();
+    case 4:
+      break;
+    default:
+      break;
+  }
 }
