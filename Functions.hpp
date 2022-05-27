@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string>
 using namespace std;
 
 //Function declarations
@@ -31,4 +32,21 @@ void UserDecision(int UserInput){
     default:
       break;
   }
+}
+
+void OpenAccount(){
+ string Name, Email;
+ int SecurityPin = 0;
+ cout << "Hi, we are so happy you would like to open a bank account with us." << endl;
+ cout << "To open an account we will need some basic information." << endl << endl;
+ cout << "First please enter your name: ";
+ cin >> Name;
+ cout << "Next we will need you to enter an email address you would like to be associated with your account: ";
+ cin >> Email;
+ cout << "To log in to your account you will be asked for your email address and security pin. Enter a pin you would like to be associated with your account. Your pin cannot be longer then four digits: ";
+ cin >> SecurityPin;
+ while(SecurityPin >= 10000 || SecurityPin < 1000){
+   cout << "That is not a long enough security pin please enter a four digit security pin: ";
+   cin >> SecurityPin;
+ }
 }
