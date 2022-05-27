@@ -8,4 +8,5 @@ int main(){
     cout << "That is not an option please enter another option." << endl;
     cin >> UserInput;
   }
+  UserDecision(UserInput);
 }
