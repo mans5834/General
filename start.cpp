@@ -2,7 +2,6 @@
 
 int main(){
   int UserInput = 0;
-  double Balance = 0;
   Introduction();
   cin >> UserInput;
   while(UserInput < 1 || UserInput > 4){
