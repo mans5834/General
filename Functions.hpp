@@ -53,7 +53,7 @@ void OpenAccount(){
    cout << "That is not a long enough security pin please enter a four digit security pin: ";
    cin >> SecurityPin;
  }
- ofile.open("textfile.txt.");
+ ofile.open("textfile.txt");
  ofile << Name << SecurityPin << Email << Balance << endl;
  ofile.close();
  cout << "Congratulations! You have successfully created an account!" << endl;
