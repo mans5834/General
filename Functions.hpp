@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<fstream>
 using namespace std;
 
 //Function declarations
@@ -37,6 +38,7 @@ void UserDecision(int UserInput){
 void OpenAccount(){
  string Name, Email;
  int SecurityPin = 0;
+ ofstream ofile;
  cout << "Hi, we are so happy you would like to open a bank account with us." << endl;
  cout << "To open an account we will need some basic information." << endl << endl;
  cout << "First please enter your name: ";
@@ -49,4 +51,5 @@ void OpenAccount(){
    cout << "That is not a long enough security pin please enter a four digit security pin: ";
    cin >> SecurityPin;
  }
+ ofile.open("textfile.txt.");
 }
