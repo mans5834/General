@@ -11,6 +11,8 @@ void BWD();
 void CloseAccount();
 //End of function declarations
 
+double Balance = 0;
+
 void Introduction(){
   cout << "     Welcome to your online banking system. We have been happily serving the community since 1999." << endl << endl;
   cout << "What would you like to do today?" << endl;
