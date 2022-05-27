@@ -26,13 +26,11 @@ void UserDecision(int UserInput){
   switch(UserInput){
     case 1:
       OpenAccount();
-/*    case 2:
+    case 2:
       BWD();
     case 3:
       CloseAccount();
-    case 4:
-      break;
-*/    default:
+    default:
       break;
   }
 }
@@ -56,7 +54,11 @@ void OpenAccount(){
  ofile.open("textfile.txt", fstream::app);
  ofile << Name << " " << SecurityPin << " " << Email << " "<< Balance << endl;
  ofile.close();
- cout << "Congratulations! You have successfully created an account!" << endl;
+ cout << endl << "Congratulations! You have successfully created an account!" << endl;
  cout << "If you would like to add or withdraw money from your account just open this banking system again." << endl;
  cout << "Thank you!" << endl << endl;
+}
+
+void BWD(){
+  
 }
