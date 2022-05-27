@@ -52,4 +52,6 @@ void OpenAccount(){
    cin >> SecurityPin;
  }
  ofile.open("textfile.txt.");
+ ofile << Name << SecurityPin << Email << Balance << endl;
+ ofile.close();
 }
