@@ -26,13 +26,13 @@ void UserDecision(int UserInput){
   switch(UserInput){
     case 1:
       OpenAccount();
-    case 2:
+/*    case 2:
       BWD();
     case 3:
       CloseAccount();
     case 4:
       break;
-    default:
+*/    default:
       break;
   }
 }
