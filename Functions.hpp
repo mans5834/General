@@ -54,7 +54,7 @@ void OpenAccount(){
    cin >> SecurityPin;
  }
  ofile.open("textfile.txt");
- ofile << Name << SecurityPin << Email << Balance << endl;
+ ofile << Name << " " << SecurityPin << " " << Email << " "<< Balance << endl;
  ofile.close();
  cout << "Congratulations! You have successfully created an account!" << endl;
  cout << "If you would like to add or withdraw money from your account just open this banking system again." << endl;
