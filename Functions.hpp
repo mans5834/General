@@ -60,7 +60,7 @@ void OpenAccount(){
 }
 
 void BWD(){
-  string Email, Name, ActualEmail;
+  string Email, Name, ActualEmail, Answer;
   int SecurityPin, ActualSecurityPin;
   ifstream infile;
   cout << endl << "Email: ";
@@ -68,5 +68,13 @@ void BWD(){
   cout << "Security Pin: ";
   cin >> SecurityPin;
   infile.open("textfile.txt");
-  
+  while(!eof() || Email == ActualEmail){
+     infile >> Name >> ActualSecurityPin >> ActualEmail >> Balance;
+  }
+  if(Email == ActualEmail && SecurityPin == ActualSecurityPin){
+    cout << "So nice to see you again " << Name << "! What would you like to do today, check balance, withdraw, or deposit? ";
+    cin >> Answer;
+  }else{
+    cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl 
+  }
 }
