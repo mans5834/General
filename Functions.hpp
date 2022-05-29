@@ -60,5 +60,13 @@ void OpenAccount(){
 }
 
 void BWD(){
+  string Email, Name, ActualEmail;
+  int SecurityPin, ActualSecurityPin;
+  ifstream infile;
+  cout << endl << "Email: ";
+  cin >> Email;
+  cout << "Security Pin: ";
+  cin >> SecurityPin;
+  infile.open("textfile.txt");
   
 }
