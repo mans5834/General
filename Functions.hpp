@@ -74,6 +74,15 @@ void BWD(){
   if(Email == ActualEmail && SecurityPin == ActualSecurityPin){
     cout << "So nice to see you again " << Name << "! What would you like to do today, check balance, withdraw, or deposit? ";
     cin >> Answer;
+    if(Answer == "check balance" || Answer == "Check Balance" || Answer == "check Balance" || Answer == "Check balance"){
+      cout << "Your current balance is " << Balance;
+    }else if(Answer == "withdraw" || Answer == "Withdraw"){
+      
+    }else if(Answer == "deposit" || Answer == "Deposit"){
+      
+    }else{
+      cout << "We are so sorry we did not recognize that answer. Please try again later. Thank You!" << endl;
+    }
   }else{
     cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl 
   }
