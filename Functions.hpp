@@ -62,7 +62,7 @@ void OpenAccount(){
 void BWD(){
   string Email, Name, ActualEmail, Answer;
   int SecurityPin, ActualSecurityPin;
-  double AmountToWithdraw;
+  double AmountToWithdraw, AmountToDeposit;
   ifstream infile;
   cout << endl << "Email: ";
   cin >> Email;
@@ -82,9 +82,13 @@ void BWD(){
       cin >> AmountToWithdraw;
       Balance -= AmountToWithdraw;
       cout << "Your requested withdrawal amount was " << AmountToWithdraw << " and your new current balance is " << Balance << ". Have a good day!" << endl;
-      
+      //figure out how to add the new balance to the text file without erasing everything
     }else if(Answer == "deposit" || Answer == "Deposit"){
-      
+      cout << "How much would you like to Deposit? ";
+      cin >> AmountToDeposit;
+      Balance += AmountToDeposit;
+      cout << "Your requested deposit amount was " << AmountToDeposit << " and your new current balance is " << Balance << ". Have a good day!" << endl;
+      //figure out how to add the new balance to the text file without erasing everthing
     }else{
       cout << "We are so sorry we did not recognize that answer. Please try again later. Thank You!" << endl;
     }
