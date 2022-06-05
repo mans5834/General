@@ -9,6 +9,7 @@ void UserDecision(int);
 void OpenAccount();
 void BWD();
 void CloseAccount();
+void FileUpdate();
 //End of function declarations
 
 double Balance = 0;
@@ -95,4 +96,8 @@ void BWD(){
   }else{
     cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl 
   }
+}
+
+void FileUpdate(){
+  
 }
