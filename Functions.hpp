@@ -102,14 +102,17 @@ void FileUpdate(string name, int SecurityPin, string Email){
   string DeletedLine;
   ifstream TempIn;
   ostream TempOut;
-  TempIn.open(textfile.txt);
-  TempOut.open(TempFile.txt);
+  TempIn.open("textfile.txt");
+  TempOut.open("TempFile.txt");
   while(getline(TempIn, DeletedLine)){
     if(TempOut.substr(0, name.size()) != name)
       TempOut << DeletedLine << endl;
   }
   TempIn.close();
   TempOut.close();
-  TempOut.open(TempFile.txt);
-  
+  TempOut.open("TempFile.txt", fstream::app);
+  TempOut << name << " " << SecurityPin << " " << Email << " " << Balance << endl;
+  TempOut.close;
+  remove("textfile.txt");
+  rename("Tempfile.txt", "textile.txt");
 }
