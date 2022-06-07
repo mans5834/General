@@ -9,6 +9,7 @@ void UserDecision(int);
 void OpenAccount();
 void BWD();
 void CloseAccount();
+void FileUpdate(string, int, string);
 //End of function declarations
 
 double Balance = 0;
@@ -26,13 +27,11 @@ void UserDecision(int UserInput){
   switch(UserInput){
     case 1:
       OpenAccount();
-/*    case 2:
+    case 2:
       BWD();
     case 3:
       CloseAccount();
-    case 4:
-      break;
-*/    default:
+    default:
       break;
   }
 }
@@ -56,7 +55,64 @@ void OpenAccount(){
  ofile.open("textfile.txt", fstream::app);
  ofile << Name << " " << SecurityPin << " " << Email << " "<< Balance << endl;
  ofile.close();
- cout << "Congratulations! You have successfully created an account!" << endl;
+ cout << endl << "Congratulations! You have successfully created an account!" << endl;
  cout << "If you would like to add or withdraw money from your account just open this banking system again." << endl;
  cout << "Thank you!" << endl << endl;
+}
+
+void BWD(){
+  string Email, Name, ActualEmail, Answer;
+  int SecurityPin, ActualSecurityPin;
+  double AmountToWithdraw, AmountToDeposit;
+  ifstream infile;
+  cout << endl << "Email: ";
+  cin >> Email;
+  cout << "Security Pin: ";
+  cin >> SecurityPin;
+  infile.open("textfile.txt");
+  while(!eof() || Email == ActualEmail){
+     infile >> Name >> ActualSecurityPin >> ActualEmail >> Balance;
+  }
+  if(Email == ActualEmail && SecurityPin == ActualSecurityPin){
+    cout << "So nice to see you again " << Name << "! What would you like to do today, check balance, withdraw, or deposit? ";
+    cin >> Answer;
+    if(Answer == "check balance" || Answer == "Check Balance" || Answer == "check Balance" || Answer == "Check balance"){
+      cout << "Your current balance is " << Balance;
+    }else if(Answer == "withdraw" || Answer == "Withdraw"){
+      cout << "How much would you like to withdraw? ";
+      cin >> AmountToWithdraw;
+      Balance -= AmountToWithdraw;
+      cout << "Your requested withdrawal amount was " << AmountToWithdraw << " and your new current balance is " << Balance << ". Have a good day!" << endl;
+      //figure out how to add the new balance to the text file without erasing everything
+    }else if(Answer == "deposit" || Answer == "Deposit"){
+      cout << "How much would you like to Deposit? ";
+      cin >> AmountToDeposit;
+      Balance += AmountToDeposit;
+      cout << "Your requested deposit amount was " << AmountToDeposit << " and your new current balance is " << Balance << ". Have a good day!" << endl;
+      //figure out how to add the new balance to the text file without erasing everthing
+    }else{
+      cout << "We are so sorry we did not recognize that answer. Please try again later. Thank You!" << endl;
+    }
+  }else{
+    cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl 
+  }
+}
+
+void FileUpdate(string name, int SecurityPin, string Email){
+  string DeletedLine;
+  ifstream TempIn;
+  ostream TempOut;
+  TempIn.open("textfile.txt");
+  TempOut.open("TempFile.txt");
+  while(getline(TempIn, DeletedLine)){
+    if(TempOut.substr(0, name.size()) != name)
+      TempOut << DeletedLine << endl;
+  }
+  TempIn.close();
+  TempOut.close();
+  TempOut.open("TempFile.txt", fstream::app);
+  TempOut << name << " " << SecurityPin << " " << Email << " " << Balance << endl;
+  TempOut.close;
+  remove("textfile.txt");
+  rename("Tempfile.txt", "textile.txt");
 }
