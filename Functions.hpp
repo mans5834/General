@@ -9,7 +9,7 @@ void UserDecision(int);
 void OpenAccount();
 void BWD();
 void CloseAccount();
-void FileUpdate();
+void FileUpdate(string, int, string);
 //End of function declarations
 
 double Balance = 0;
@@ -98,6 +98,18 @@ void BWD(){
   }
 }
 
-void FileUpdate(){
- 
+void FileUpdate(string name, int SecurityPin, string Email){
+  string DeletedLine;
+  ifstream TempIn;
+  ostream TempOut;
+  TempIn.open(textfile.txt);
+  TempOut.open(TempFile.txt);
+  while(getline(TempIn, DeletedLine)){
+    if(TempOut.substr(0, name.size()) != name)
+      TempOut << DeletedLine << endl;
+  }
+  TempIn.close();
+  TempOut.close();
+  TempOut.open(TempFile.txt);
+  
 }
