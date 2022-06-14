@@ -27,10 +27,13 @@ void UserDecision(int UserInput){
   switch(UserInput){
     case 1:
       OpenAccount();
+      break;
     case 2:
       BWD();
+      break;
     case 3:
       CloseAccount();
+      break;
     default:
       break;
   }
@@ -70,49 +73,83 @@ void BWD(){
   cout << "Security Pin: ";
   cin >> SecurityPin;
   infile.open("textfile.txt");
-  while(!eof() || Email == ActualEmail){
+  while(!infile.eof() && Email != ActualEmail){
      infile >> Name >> ActualSecurityPin >> ActualEmail >> Balance;
   }
   if(Email == ActualEmail && SecurityPin == ActualSecurityPin){
-    cout << "So nice to see you again " << Name << "! What would you like to do today, check balance, withdraw, or deposit? ";
+    cout << "So nice to see you again " << Name << "! What would you like to do today, checkbalance, withdraw, or deposit? ";
     cin >> Answer;
-    if(Answer == "check balance" || Answer == "Check Balance" || Answer == "check Balance" || Answer == "Check balance"){
-      cout << "Your current balance is " << Balance;
+    if(Answer == "checkbalance" || Answer == "CheckBalance" || Answer == "checkBalance" || Answer == "Checkbalance"){
+      cout << "Your current balance is " << Balance << endl;
     }else if(Answer == "withdraw" || Answer == "Withdraw"){
       cout << "How much would you like to withdraw? ";
       cin >> AmountToWithdraw;
       Balance -= AmountToWithdraw;
       cout << "Your requested withdrawal amount was " << AmountToWithdraw << " and your new current balance is " << Balance << ". Have a good day!" << endl;
-      //figure out how to add the new balance to the text file without erasing everything
+      FileUpdate(Name, ActualSecurityPin, ActualEmail);
     }else if(Answer == "deposit" || Answer == "Deposit"){
       cout << "How much would you like to Deposit? ";
       cin >> AmountToDeposit;
       Balance += AmountToDeposit;
       cout << "Your requested deposit amount was " << AmountToDeposit << " and your new current balance is " << Balance << ". Have a good day!" << endl;
-      //figure out how to add the new balance to the text file without erasing everthing
+      FileUpdate(Name, ActualSecurityPin, ActualEmail);
     }else{
       cout << "We are so sorry we did not recognize that answer. Please try again later. Thank You!" << endl;
     }
   }else{
-    cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl 
+    cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl;
   }
+}
+
+void CloseAccount(){
+  string Email, Name, ActualEmail, Answer;
+  int SecurityPin, ActualSecurityPin;
+  ifstream infile;
+  cout << "We are so sorry you would like to close your account with us. If you would ever like to open a new account dont hesitate to do so!" << endl;
+  cout << "To verify you can close the account, please enter your email and security pin below." << endl << endl;
+  cout << "Email: ";
+  cin >> Email;
+  cout << "Security Pin: ";
+  cin >> SecurityPin;
+  infile.open("textfile.txt");
+  while(!infile.eof() && Email != ActualEmail){
+     infile >> Name >> ActualSecurityPin >> ActualEmail >> Balance;
+  }
+  infile.close();
+  if(Email == ActualEmail && SecurityPin == ActualSecurityPin){
+    string DeletedLine;
+    ifstream TempIn;
+    ofstream TempOut;
+    TempIn.open("textfile.txt");
+    TempOut.open("Tempfile.txt");
+    while(getline(TempIn, DeletedLine)){
+      if(DeletedLine.substr(0, Name.size()) != Name)
+        TempOut << DeletedLine << endl;
+    }
+    TempIn.close();
+    TempOut.close();
+    remove("textfile.txt");
+    rename("Tempfile.txt", "textfile.txt");
+    cout << "Your account has been close. We are so sad to see you go!";
+  }else
+    cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl;
 }
 
 void FileUpdate(string name, int SecurityPin, string Email){
   string DeletedLine;
   ifstream TempIn;
-  ostream TempOut;
+  ofstream TempOut;
   TempIn.open("textfile.txt");
   TempOut.open("TempFile.txt");
   while(getline(TempIn, DeletedLine)){
-    if(TempOut.substr(0, name.size()) != name)
+    if(DeletedLine.substr(0, name.size()) != name)
       TempOut << DeletedLine << endl;
   }
   TempIn.close();
   TempOut.close();
   TempOut.open("TempFile.txt", fstream::app);
   TempOut << name << " " << SecurityPin << " " << Email << " " << Balance << endl;
-  TempOut.close;
+  TempOut.close();
   remove("textfile.txt");
-  rename("Tempfile.txt", "textile.txt");
+  rename("Tempfile.txt", "textfile.txt");
 }
