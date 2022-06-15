@@ -23,7 +23,7 @@ void Introduction(){
   cout << "4. Exit" << endl;
 }
 
-void UserDecision(int UserInput){
+void UserDecision(int UserInput){  //manages the users decision
   switch(UserInput){
     case 1:
       OpenAccount();
@@ -51,12 +51,12 @@ void OpenAccount(){
  cin >> Email;
  cout << "To log in to your account you will be asked for your email address and security pin. Enter a pin you would like to be associated with your account. Your pin cannot be longer then four digits: ";
  cin >> SecurityPin;
- while(SecurityPin >= 10000 || SecurityPin < 1000){
+ while(SecurityPin >= 10000 || SecurityPin < 1000){  //loops until the user enters a four digit security pin
    cout << "That is not a long enough security pin please enter a four digit security pin: ";
    cin >> SecurityPin;
  }
  ofile.open("textfile.txt", fstream::app);
- ofile << Name << " " << SecurityPin << " " << Email << " "<< Balance << endl;
+ ofile << Name << " " << SecurityPin << " " << Email << " "<< Balance << endl;  //commits the new user to the textfile full of the banks information
  ofile.close();
  cout << endl << "Congratulations! You have successfully created an account!" << endl;
  cout << "If you would like to add or withdraw money from your account just open this banking system again." << endl;
@@ -73,25 +73,25 @@ void BWD(){
   cout << "Security Pin: ";
   cin >> SecurityPin;
   infile.open("textfile.txt");
-  while(!infile.eof() && Email != ActualEmail){
+  while(!infile.eof() && Email != ActualEmail){  //finds the information associated with the email the user entered
      infile >> Name >> ActualSecurityPin >> ActualEmail >> Balance;
   }
-  if(Email == ActualEmail && SecurityPin == ActualSecurityPin){
+  if(Email == ActualEmail && SecurityPin == ActualSecurityPin){  //if the user entered correct login information they are allowed to continue
     cout << "So nice to see you again " << Name << "! What would you like to do today, checkbalance, withdraw, or deposit? ";
     cin >> Answer;
-    if(Answer == "checkbalance" || Answer == "CheckBalance" || Answer == "checkBalance" || Answer == "Checkbalance"){
+    if(Answer == "checkbalance" || Answer == "CheckBalance" || Answer == "checkBalance" || Answer == "Checkbalance"){  //accounts for different ways the user could enter their choice
       cout << "Your current balance is " << Balance << endl;
     }else if(Answer == "withdraw" || Answer == "Withdraw"){
-      cout << "How much would you like to withdraw? ";
+      cout << "How much would you like to withdraw? $";
       cin >> AmountToWithdraw;
       Balance -= AmountToWithdraw;
-      cout << "Your requested withdrawal amount was " << AmountToWithdraw << " and your new current balance is " << Balance << ". Have a good day!" << endl;
-      FileUpdate(Name, ActualSecurityPin, ActualEmail);
+      cout << "Your requested withdrawal amount was $" << AmountToWithdraw << " and your new current balance is $" << Balance << ". Have a good day!" << endl;
+      FileUpdate(Name, ActualSecurityPin, ActualEmail);   //updates the users account with the new information
     }else if(Answer == "deposit" || Answer == "Deposit"){
-      cout << "How much would you like to Deposit? ";
+      cout << "How much would you like to Deposit? $";
       cin >> AmountToDeposit;
       Balance += AmountToDeposit;
-      cout << "Your requested deposit amount was " << AmountToDeposit << " and your new current balance is " << Balance << ". Have a good day!" << endl;
+      cout << "Your requested deposit amount was $" << AmountToDeposit << " and your new current balance is $" << Balance << ". Have a good day!" << endl;
       FileUpdate(Name, ActualSecurityPin, ActualEmail);
     }else{
       cout << "We are so sorry we did not recognize that answer. Please try again later. Thank You!" << endl;
@@ -112,11 +112,11 @@ void CloseAccount(){
   cout << "Security Pin: ";
   cin >> SecurityPin;
   infile.open("textfile.txt");
-  while(!infile.eof() && Email != ActualEmail){
+  while(!infile.eof() && Email != ActualEmail){  //finds the account to be closed
      infile >> Name >> ActualSecurityPin >> ActualEmail >> Balance;
   }
   infile.close();
-  if(Email == ActualEmail && SecurityPin == ActualSecurityPin){
+  if(Email == ActualEmail && SecurityPin == ActualSecurityPin){  //checks to see if they logged in with the correct information. These lines of code in the if statement are almost exaclty like the lines in the fileupdate function, but they just delete the account and dont update it to a new file
     string DeletedLine;
     ifstream TempIn;
     ofstream TempOut;
@@ -130,26 +130,26 @@ void CloseAccount(){
     TempOut.close();
     remove("textfile.txt");
     rename("Tempfile.txt", "textfile.txt");
-    cout << "Your account has been close. We are so sad to see you go!";
+    cout << "Your account has been closed. We are so sad to see you go!" << endl;
   }else
     cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl;
 }
 
-void FileUpdate(string name, int SecurityPin, string Email){
+void FileUpdate(string name, int SecurityPin, string Email){  //updates the file storing all bank information everytime a person deposits or withdrawls money
   string DeletedLine;
   ifstream TempIn;
   ofstream TempOut;
   TempIn.open("textfile.txt");
-  TempOut.open("TempFile.txt");
-  while(getline(TempIn, DeletedLine)){
-    if(DeletedLine.substr(0, name.size()) != name)
-      TempOut << DeletedLine << endl;
+  TempOut.open("TempFile.txt");  //opens a temporary file to store the new balance of the persons account
+  while(getline(TempIn, DeletedLine)){  //deletes the line in the textfile that stores the users information so that it can be updated
+    if(DeletedLine.substr(0, name.size()) != name)  //checks if current lines name is equal to the person who wants to update their account
+      TempOut << DeletedLine << endl;  //if the current line is not the person who wants to change their account the whole line of information is transferred to the new file
   }
   TempIn.close();
   TempOut.close();
   TempOut.open("TempFile.txt", fstream::app);
-  TempOut << name << " " << SecurityPin << " " << Email << " " << Balance << endl;
+  TempOut << name << " " << SecurityPin << " " << Email << " " << Balance << endl;  //updates the temporary file to include the new information for the person who is updating their account
   TempOut.close();
-  remove("textfile.txt");
-  rename("Tempfile.txt", "textfile.txt");
+  remove("textfile.txt");  //removes the old textfile because it is irrelevent
+  rename("Tempfile.txt", "textfile.txt");  //changes the temporary file to the file associated with the banking system
 }
