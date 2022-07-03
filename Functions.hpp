@@ -26,7 +26,7 @@ void Introduction(){
 
 void UserSelection(){  //manages user decision after they have selected for the first time
   int UserInput = 0;
-  cout << "If you would like to do anything else such as, create another account, login to your account, or close an account select from the list below. If you would like to exit enter 4." << endl;
+  cout << endl << "If you would like to do anything else such as, create another account, login to your account, or close an account select from the list below. If you would like to exit enter 4." << endl;
   cout << "1. Open an account" << endl;
   cout << "2. Check balance / withdraw / deposit" << endl;
   cout << "3. Close an account" << endl;
@@ -72,6 +72,7 @@ void OpenAccount(){
  ofile << Name << " " << SecurityPin << " " << Email << " "<< Balance << endl;  //commits the new user to the textfile full of the banks information
  ofile.close();
  cout << endl << "Congratulations! You have successfully created an account!" << endl;
+ UserSelection();
 }
 
 void BWD(){
@@ -110,6 +111,7 @@ void BWD(){
   }else{
     cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl;
   }
+  UserSelection();
 }
 
 void CloseAccount(){
@@ -144,6 +146,7 @@ void CloseAccount(){
     cout << "Your account has been closed. We are so sad to see you go!" << endl;
   }else
     cout << "The email or password you entered was not recognized please try again or ask an associate for help." << endl;
+  UserSelection();
 }
 
 void FileUpdate(string name, int SecurityPin, string Email){  //updates the file storing all bank information everytime a person deposits or withdrawls money
