@@ -5,6 +5,7 @@ using namespace std;
 
 //Function declarations
 void Introduction();
+void UserSelection(int);
 void UserDecision(int);
 void OpenAccount();
 void BWD();
@@ -23,6 +24,17 @@ void Introduction(){
   cout << "4. Exit" << endl;
 }
 
+void UserSelection(){  //manages user decision after they have selected for the first time
+  int UserInput = 0;
+  cout << "If you would like to do anything else such as, create another account, login to your account, or close an account select from the list below. If you would like to exit enter 4." << endl;
+  cout << "1. Open an account" << endl;
+  cout << "2. Check balance / withdraw / deposit" << endl;
+  cout << "3. Close an account" << endl;
+  cout << "4. Exit" << endl;
+  cin >> UserInput;
+  UserDecision(UserInput);
+}
+
 void UserDecision(int UserInput){  //manages the users decision
   switch(UserInput){
     case 1:
@@ -35,13 +47,14 @@ void UserDecision(int UserInput){  //manages the users decision
       CloseAccount();
       break;
     default:
+      cout << "Thank You!" << endl;
       break;
   }
 }
 
 void OpenAccount(){
  string Name, Email;
- int SecurityPin = 0;
+ int SecurityPin = 0, UserInput = 0;
  ofstream ofile;
  cout << "Hi, we are so happy you would like to open a bank account with us." << endl;
  cout << "To open an account we will need some basic information." << endl << endl;
@@ -59,8 +72,6 @@ void OpenAccount(){
  ofile << Name << " " << SecurityPin << " " << Email << " "<< Balance << endl;  //commits the new user to the textfile full of the banks information
  ofile.close();
  cout << endl << "Congratulations! You have successfully created an account!" << endl;
- cout << "If you would like to add or withdraw money from your account just open this banking system again." << endl;
- cout << "Thank you!" << endl << endl;
 }
 
 void BWD(){
